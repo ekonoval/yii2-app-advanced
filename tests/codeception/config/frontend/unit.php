@@ -3,7 +3,7 @@
 /**
  * Application configuration for frontend unit tests
  */
-return yii\helpers\ArrayHelper::merge(
+$res = yii\helpers\ArrayHelper::merge(
     require(YII_APP_BASE_PATH . '/common/config/main.php'),
     require(YII_APP_BASE_PATH . '/common/config/main-local.php'),
     require(YII_APP_BASE_PATH . '/frontend/config/main.php'),
@@ -14,3 +14,5 @@ return yii\helpers\ArrayHelper::merge(
     [
     ]
 );
+
+return $res;

@@ -2,6 +2,7 @@
 
 namespace tests\codeception\frontend\unit\models;
 
+use Codeception\Specify;
 use Yii;
 use tests\codeception\frontend\unit\TestCase;
 use frontend\models\ContactForm;
@@ -9,7 +10,7 @@ use frontend\models\ContactForm;
 class ContactFormTest extends TestCase
 {
 
-    use \Codeception\Specify;
+    use Specify;
 
     protected function setUp()
     {
