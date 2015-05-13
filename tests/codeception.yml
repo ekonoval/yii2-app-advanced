@@ -1,3 +1,5 @@
+# alias cept="/var/www/yii2/yii2advanced/vendor/bin/codecept"
+# cept run unit  unit/models/ContactFormTest.php
 include:
   - codeception/common
   - codeception/console
