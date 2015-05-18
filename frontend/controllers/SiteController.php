@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\User;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -8,6 +9,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\base\InvalidParamException;
+use yii\swiftmailer\Mailer;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -167,5 +169,23 @@ class SiteController extends Controller
         return $this->render('resetPassword', [
             'model' => $model,
         ]);
+    }
+
+    public function actionTestMail()
+    {
+        $user = User::findIdentity(1);
+
+
+        /** @var Mailer $mailer */
+        $mailer = Yii::$app->mailer;
+        $view = ['html' => 'passwordResetToken-html', 'text' => 'passwordResetToken-text'];
+        $view = ['html' => null, 'text' => null];
+        //$view = 'passwordResetToken-html';
+
+        return $mailer->compose($view, ['user' => $user])
+            ->setFrom([\Yii::$app->params['supportEmail'] => \Yii::$app->name . ' robot'])
+            ->setTo('ekonoval@gmail.com')
+            ->setSubject('Password reset for ' . \Yii::$app->name)
+            ->send();
     }
 }
